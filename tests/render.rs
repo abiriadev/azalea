@@ -14,6 +14,6 @@ fn render() {
 
 	assert_eq!(
 		r"<h1>Hello, azalea!</h1>",
-		template.render(&props)
+		template.render(&props).unwrap()
 	);
 }
