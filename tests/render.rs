@@ -4,7 +4,7 @@ use azalea;
 
 #[test]
 fn render() {
-	let template = azalea::Template::new(r"<h1>{{title}}</h1>".to_owned());
+	let template = azalea::Template::new(r"<h1>{{ title }}</h1>".to_owned());
 
 	let props = {
 		let mut h = HashMap::new();
