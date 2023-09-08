@@ -7,5 +7,7 @@ pub struct Template {
 impl Template {
 	pub fn new(src: String) -> Self { Self { src } }
 
-	pub fn render(props: HashMap<&'static str, String>) -> String { todo!() }
+	pub fn render(&self, props: HashMap<&'static str, String>) -> String {
+		todo!()
+	}
 }
