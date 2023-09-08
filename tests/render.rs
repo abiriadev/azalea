@@ -12,5 +12,8 @@ fn render() {
 		h
 	};
 
-	assert_eq!(r"<h1></h1>", template.render(&props));
+	assert_eq!(
+		r"<h1>Hello, azalea!</h1>",
+		template.render(&props)
+	);
 }
