@@ -1,7 +1,9 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, sync::OnceLock};
 
 use regex::Regex;
 use tl::{parse, Node, ParserOptions};
+
+static PROP_REGEX: OnceLock<Regex> = OnceLock::new();
 
 pub struct Template {
 	src: String,
@@ -14,6 +16,9 @@ impl Template {
 		// TODO: return Err if parsing fail
 		let mut vdom = parse(&self.src, ParserOptions::default()).unwrap();
 
+		let prop_regex = PROP_REGEX
+			.get_or_init(|| Regex::new(r"\{\{\s*(\w+)\s*\}\}").unwrap());
+
 		for node in vdom.nodes_mut() {
 			let bytes = match node {
 				Node::Raw(r) => r,
@@ -22,8 +27,7 @@ impl Template {
 
 			let text = bytes.try_as_utf8_str().unwrap();
 
-			let re = Regex::new(r"\{\{\s*(\w+)\s*\}\}").unwrap();
-			let caps = re.captures(text).unwrap();
+			let caps = prop_regex.captures(text).unwrap();
 
 			let Some(prop) = caps.get(1) else { continue; };
 
