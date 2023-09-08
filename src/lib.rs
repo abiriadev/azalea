@@ -1,14 +1,11 @@
-pub fn add(left: usize, right: usize) -> usize {
-	left + right
+use std::collections::HashMap;
+
+pub struct Template {
+	src: String,
 }
 
-#[cfg(test)]
-mod tests {
-	use super::*;
+impl Template {
+	pub fn new(src: String) -> Self { Self { src } }
 
-	#[test]
-	fn it_works() {
-		let result = add(2, 2);
-		assert_eq!(result, 4);
-	}
+	pub fn render(props: HashMap<&'static str, String>) -> String { todo!() }
 }
